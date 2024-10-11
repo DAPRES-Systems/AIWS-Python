@@ -72,9 +72,9 @@ function ItemsTable() {
           <Thead>
             <Tr>
               <Th>ID</Th>
-              <Th>Title</Th>
-              <Th>Description</Th>
-              <Th>Actions</Th>
+              <Th>Name</Th>
+              <Th>Lagerort</Th>
+              <Th>Aktonen</Th>
             </Tr>
           </Thead>
           {isPending ? (
@@ -91,7 +91,7 @@ function ItemsTable() {
             <Tbody>
               {items?.data.map((item) => (
                 <Tr key={item.id} opacity={isPlaceholderData ? 0.5 : 1}>
-                  <Td>{item.id}</Td>
+                  <Td>TBA</Td>
                   <Td isTruncated maxWidth="150px">
                     {item.title}
                   </Td>
