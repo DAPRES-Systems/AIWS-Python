@@ -71,16 +71,22 @@ function ItemsTable() {
         <Table size={{ base: "sm", md: "md" }}>
           <Thead>
             <Tr>
-              <Th>ID</Th>
-              <Th>Title</Th>
-              <Th>Description</Th>
+              <Th>AIWSCODE</Th>
+              <Th>Name</Th>
+              <Th>Location</Th>
+              <Th>Expiry</Th>
+              <Th>Stock (stk)</Th>
+              <Th>Minimum Threshold (mtk)</Th>
+              <Th>Lot</Th>
+              <Th>Serial</Th>
+              <Th>Notes</Th>
               <Th>Actions</Th>
             </Tr>
           </Thead>
           {isPending ? (
             <Tbody>
               <Tr>
-                {new Array(4).fill(null).map((_, index) => (
+                {new Array(10).fill(null).map((_, index) => (
                   <Td key={index}>
                     <SkeletonText noOfLines={1} paddingBlock="16px" />
                   </Td>
@@ -91,17 +97,15 @@ function ItemsTable() {
             <Tbody>
               {items?.data.map((item) => (
                 <Tr key={item.id} opacity={isPlaceholderData ? 0.5 : 1}>
-                  <Td>{item.id}</Td>
-                  <Td isTruncated maxWidth="150px">
-                    {item.title}
-                  </Td>
-                  <Td
-                    color={!item.description ? "ui.dim" : "inherit"}
-                    isTruncated
-                    maxWidth="150px"
-                  >
-                    {item.description || "N/A"}
-                  </Td>
+                  <Td>{item.aiwscode}</Td>
+                  <Td isTruncated maxWidth="150px">{item.name}</Td>
+                  <Td>{item.location}</Td>
+                  <Td>{item.expiry}</Td>
+                  <Td>{item.stk}</Td>
+                  <Td>{item.mtk}</Td>
+                  <Td>{item.lot}</Td>
+                  <Td>{item.serial}</Td>
+                  <Td>{item.notes}</Td>
                   <Td>
                     <ActionsMenu type={"Item"} value={item} />
                   </Td>
@@ -120,6 +124,7 @@ function ItemsTable() {
     </>
   )
 }
+
 
 function Items() {
   return (

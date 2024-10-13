@@ -12,33 +12,22 @@ router = APIRouter()
 
 @router.get("/", response_model=ItemsPublic)
 def read_items(
-    session: SessionDep, current_user: CurrentUser, skip: int = 0, limit: int = 100
+    session: SessionDep, skip: int = 0, limit: int = 100
 ) -> Any:
     """
-    Retrieve items.
+    Retrieve all items, regardless of the user.
     """
+    # Zähle alle Items in der Datenbank
+    count_statement = select(func.count()).select_from(Item)
+    count = session.exec(count_statement).one()
+    
+    # Lade alle Items unter Berücksichtigung der Paginierung
+    statement = select(Item).offset(skip).limit(limit)
+    items = session.exec(statement).all()
 
-    if current_user.is_superuser:
-        count_statement = select(func.count()).select_from(Item)
-        count = session.exec(count_statement).one()
-        statement = select(Item).offset(skip).limit(limit)
-        items = session.exec(statement).all()
-    else:
-        count_statement = (
-            select(func.count())
-            .select_from(Item)
-            .where(Item.owner_id == current_user.id)
-        )
-        count = session.exec(count_statement).one()
-        statement = (
-            select(Item)
-            .where(Item.owner_id == current_user.id)
-            .offset(skip)
-            .limit(limit)
-        )
-        items = session.exec(statement).all()
-
+    # Gebe alle Items zusammen mit der Gesamtanzahl zurück
     return ItemsPublic(data=items, count=count)
+
 
 
 @router.get("/{id}", response_model=ItemPublic)

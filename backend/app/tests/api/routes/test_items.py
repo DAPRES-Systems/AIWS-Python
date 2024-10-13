@@ -1,8 +1,6 @@
 import uuid
-
 from fastapi.testclient import TestClient
 from sqlmodel import Session
-
 from app.core.config import settings
 from app.tests.utils.item import create_random_item
 
@@ -10,7 +8,19 @@ from app.tests.utils.item import create_random_item
 def test_create_item(
     client: TestClient, superuser_token_headers: dict[str, str]
 ) -> None:
-    data = {"title": "Foo", "description": "Fighters"}
+    data = {
+        "title": "Foo",
+        "description": "Fighters",
+        "aiwscode": "AIWS123",
+        "name": "Item Name",
+        "location": "Warehouse A",
+        "expiry": "2024-12-31",
+        "stk": 100,
+        "mtk": 10,
+        "lot": "LOT123",
+        "serial": "SERIAL123",
+        "notes": "Some notes about the item"
+    }
     response = client.post(
         f"{settings.API_V1_STR}/items/",
         headers=superuser_token_headers,
@@ -20,6 +30,15 @@ def test_create_item(
     content = response.json()
     assert content["title"] == data["title"]
     assert content["description"] == data["description"]
+    assert content["aiwscode"] == data["aiwscode"]
+    assert content["name"] == data["name"]
+    assert content["location"] == data["location"]
+    assert content["expiry"] == data["expiry"]
+    assert content["stk"] == data["stk"]
+    assert content["mtk"] == data["mtk"]
+    assert content["lot"] == data["lot"]
+    assert content["serial"] == data["serial"]
+    assert content["notes"] == data["notes"]
     assert "id" in content
     assert "owner_id" in content
 
@@ -36,6 +55,15 @@ def test_read_item(
     content = response.json()
     assert content["title"] == item.title
     assert content["description"] == item.description
+    assert content["aiwscode"] == item.aiwscode
+    assert content["name"] == item.name
+    assert content["location"] == item.location
+    assert content["expiry"] == str(item.expiry)
+    assert content["stk"] == item.stk
+    assert content["mtk"] == item.mtk
+    assert content["lot"] == item.lot
+    assert content["serial"] == item.serial
+    assert content["notes"] == item.notes
     assert content["id"] == str(item.id)
     assert content["owner_id"] == str(item.owner_id)
 
@@ -83,7 +111,19 @@ def test_update_item(
     client: TestClient, superuser_token_headers: dict[str, str], db: Session
 ) -> None:
     item = create_random_item(db)
-    data = {"title": "Updated title", "description": "Updated description"}
+    data = {
+        "title": "Updated title",
+        "description": "Updated description",
+        "aiwscode": "UPDATED_AIWS",
+        "name": "Updated Name",
+        "location": "Warehouse B",
+        "expiry": "2025-12-31",
+        "stk": 150,
+        "mtk": 20,
+        "lot": "UPDATED_LOT",
+        "serial": "UPDATED_SERIAL",
+        "notes": "Updated notes"
+    }
     response = client.put(
         f"{settings.API_V1_STR}/items/{item.id}",
         headers=superuser_token_headers,
@@ -93,6 +133,15 @@ def test_update_item(
     content = response.json()
     assert content["title"] == data["title"]
     assert content["description"] == data["description"]
+    assert content["aiwscode"] == data["aiwscode"]
+    assert content["name"] == data["name"]
+    assert content["location"] == data["location"]
+    assert content["expiry"] == data["expiry"]
+    assert content["stk"] == data["stk"]
+    assert content["mtk"] == data["mtk"]
+    assert content["lot"] == data["lot"]
+    assert content["serial"] == data["serial"]
+    assert content["notes"] == data["notes"]
     assert content["id"] == str(item.id)
     assert content["owner_id"] == str(item.owner_id)
 
@@ -100,7 +149,19 @@ def test_update_item(
 def test_update_item_not_found(
     client: TestClient, superuser_token_headers: dict[str, str]
 ) -> None:
-    data = {"title": "Updated title", "description": "Updated description"}
+    data = {
+        "title": "Updated title",
+        "description": "Updated description",
+        "aiwscode": "UPDATED_AIWS",
+        "name": "Updated Name",
+        "location": "Warehouse B",
+        "expiry": "2025-12-31",
+        "stk": 150,
+        "mtk": 20,
+        "lot": "UPDATED_LOT",
+        "serial": "UPDATED_SERIAL",
+        "notes": "Updated notes"
+    }
     response = client.put(
         f"{settings.API_V1_STR}/items/{uuid.uuid4()}",
         headers=superuser_token_headers,
@@ -115,7 +176,19 @@ def test_update_item_not_enough_permissions(
     client: TestClient, normal_user_token_headers: dict[str, str], db: Session
 ) -> None:
     item = create_random_item(db)
-    data = {"title": "Updated title", "description": "Updated description"}
+    data = {
+        "title": "Updated title",
+        "description": "Updated description",
+        "aiwscode": "UPDATED_AIWS",
+        "name": "Updated Name",
+        "location": "Warehouse B",
+        "expiry": "2025-12-31",
+        "stk": 150,
+        "mtk": 20,
+        "lot": "UPDATED_LOT",
+        "serial": "UPDATED_SERIAL",
+        "notes": "Updated notes"
+    }
     response = client.put(
         f"{settings.API_V1_STR}/items/{item.id}",
         headers=normal_user_token_headers,

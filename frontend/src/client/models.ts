@@ -17,15 +17,35 @@ export type ItemCreate = {
 }
 
 export type ItemPublic = {
-  title: string
-  description?: string | null
   id: string
   owner_id: string
+  title: string
+  description?: string | null
+  aiwscode: string
+  name: string
+  location: string
+  expiry?: string | null
+  stk: number
+  mtk: number
+  lot?: string | null
+  serial?: string | null
+  notes?: string | null
 }
 
+
 export type ItemUpdate = {
-  title?: string | null
+  owner_id: string| null
+  title: string| null
   description?: string | null
+  aiwscode: string| null
+  name: string| null
+  location: string| null
+  expiry?: string | null
+  stk: number| null
+  mtk: number| null
+  lot?: string | null
+  serial?: string | null
+  notes?: string | null
 }
 
 export type ItemsPublic = {
