@@ -75,8 +75,8 @@ function ItemsTable() {
               <Th>Name</Th>
               <Th>Location</Th>
               <Th>Expiry</Th>
-              <Th>Stock (stk)</Th>
-              <Th>Minimum Threshold (mtk)</Th>
+              <Th>STK</Th>
+              <Th>MTK</Th>
               <Th>Lot</Th>
               <Th>Serial</Th>
               <Th>Notes</Th>

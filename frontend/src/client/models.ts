@@ -12,8 +12,19 @@ export type HTTPValidationError = {
 }
 
 export type ItemCreate = {
+  id: string
+  owner_id: string
   title: string
   description?: string | null
+  aiwscode: string
+  name: string
+  location: string
+  expiry?: string | null
+  stk: number
+  mtk: number
+  lot?: string | null
+  serial?: string | null
+  notes?: string | null
 }
 
 export type ItemPublic = {

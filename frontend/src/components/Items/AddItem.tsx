@@ -11,6 +11,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Textarea,
 } from "@chakra-ui/react"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { type SubmitHandler, useForm } from "react-hook-form"
@@ -38,6 +39,15 @@ const AddItem = ({ isOpen, onClose }: AddItemProps) => {
     defaultValues: {
       title: "",
       description: "",
+      aiwscode: "",
+      name: "",
+      location: "",
+      expiry: "",
+      stk: 0,
+      mtk: 0,
+      lot: "",
+      serial: "",
+      notes: "",
     },
   })
 
@@ -88,17 +98,133 @@ const AddItem = ({ isOpen, onClose }: AddItemProps) => {
                 <FormErrorMessage>{errors.title.message}</FormErrorMessage>
               )}
             </FormControl>
-            <FormControl mt={4}>
-              <FormLabel htmlFor="description">Description</FormLabel>
+
+            <FormControl isRequired isInvalid={!!errors.aiwscode}>
+              <FormLabel htmlFor="aiwscode">AIWSCODE</FormLabel>
               <Input
-                id="description"
-                {...register("description")}
-                placeholder="Description"
+                id="aiwscode"
+                {...register("aiwscode", {
+                  required: "AIWSCODE is required.",
+                })}
+                placeholder="AIWSCODE"
                 type="text"
               />
+              {errors.aiwscode && (
+                <FormErrorMessage>{errors.aiwscode.message}</FormErrorMessage>
+              )}
+            </FormControl>
+
+            <FormControl isRequired isInvalid={!!errors.name}>
+              <FormLabel htmlFor="name">Name</FormLabel>
+              <Input
+                id="name"
+                {...register("name", {
+                  required: "Name is required.",
+                })}
+                placeholder="Name"
+                type="text"
+              />
+              {errors.name && (
+                <FormErrorMessage>{errors.name.message}</FormErrorMessage>
+              )}
+            </FormControl>
+
+            <FormControl isRequired isInvalid={!!errors.location}>
+              <FormLabel htmlFor="location">Location</FormLabel>
+              <Input
+                id="location"
+                {...register("location", {
+                  required: "Location is required.",
+                })}
+                placeholder="Location"
+                type="text"
+              />
+              {errors.location && (
+                <FormErrorMessage>{errors.location.message}</FormErrorMessage>
+              )}
+            </FormControl>
+
+            <FormControl isInvalid={!!errors.expiry}>
+              <FormLabel htmlFor="expiry">Expiry</FormLabel>
+              <Input
+                id="expiry"
+                {...register("expiry")}
+                placeholder="Expiry (YYYY-MM-DD)"
+                type="date"
+              />
+              {errors.expiry && (
+                <FormErrorMessage>{errors.expiry.message}</FormErrorMessage>
+              )}
+            </FormControl>
+
+            <FormControl isRequired isInvalid={!!errors.stk}>
+              <FormLabel htmlFor="stk">Stock (STK)</FormLabel>
+              <Input
+                id="stk"
+                {...register("stk", {
+                  required: "Stock is required.",
+                })}
+                placeholder="Stock"
+                type="number"
+              />
+              {errors.stk && (
+                <FormErrorMessage>{errors.stk.message}</FormErrorMessage>
+              )}
+            </FormControl>
+
+            <FormControl isRequired isInvalid={!!errors.mtk}>
+              <FormLabel htmlFor="mtk">Minimum Threshold (MTK)</FormLabel>
+              <Input
+                id="mtk"
+                {...register("mtk", {
+                  required: "Minimum threshold is required.",
+                })}
+                placeholder="Minimum Threshold"
+                type="number"
+              />
+              {errors.mtk && (
+                <FormErrorMessage>{errors.mtk.message}</FormErrorMessage>
+              )}
+            </FormControl>
+
+            <FormControl isInvalid={!!errors.lot}>
+              <FormLabel htmlFor="lot">Lot</FormLabel>
+              <Input
+                id="lot"
+                {...register("lot")}
+                placeholder="Lot Number"
+                type="text"
+              />
+              {errors.lot && (
+                <FormErrorMessage>{errors.lot.message}</FormErrorMessage>
+              )}
+            </FormControl>
+
+            <FormControl isInvalid={!!errors.serial}>
+              <FormLabel htmlFor="serial">Serial</FormLabel>
+              <Input
+                id="serial"
+                {...register("serial")}
+                placeholder="Serial Number"
+                type="text"
+              />
+              {errors.serial && (
+                <FormErrorMessage>{errors.serial.message}</FormErrorMessage>
+              )}
+            </FormControl>
+
+            <FormControl isInvalid={!!errors.notes}>
+              <FormLabel htmlFor="notes">Notes</FormLabel>
+              <Textarea
+                id="notes"
+                {...register("notes")}
+                placeholder="Additional notes"
+              />
+              {errors.notes && (
+                <FormErrorMessage>{errors.notes.message}</FormErrorMessage>
+              )}
             </FormControl>
           </ModalBody>
-
           <ModalFooter gap={3}>
             <Button variant="primary" type="submit" isLoading={isSubmitting}>
               Save
