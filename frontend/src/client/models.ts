@@ -20,8 +20,8 @@ export type ItemCreate = {
   name: string
   location: string
   expiry?: string | null
-  stk: number
-  mtk: number
+  stk?: string | null
+  mtk?: string | null
   lot?: string | null
   serial?: string | null
   notes?: string | null
@@ -36,8 +36,8 @@ export type ItemPublic = {
   name: string
   location: string
   expiry?: string | null
-  stk: number
-  mtk: number
+  stk?: string | null
+  mtk?: string | null
   lot?: string | null
   serial?: string | null
   notes?: string | null
@@ -52,8 +52,8 @@ export type ItemUpdate = {
   name: string| null
   location: string| null
   expiry?: string | null
-  stk: number| null
-  mtk: number| null
+  stk?: string | null
+  mtk?: string | null
   lot?: string | null
   serial?: string | null
   notes?: string | null

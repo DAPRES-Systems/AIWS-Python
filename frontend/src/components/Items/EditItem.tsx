@@ -132,7 +132,7 @@ const EditItem = ({ item, isOpen, onClose }: EditItemProps) => {
             <Input
               id="stk"
               {...register("stk", { required: "Stock is required" })}
-              type="number"
+              type="date"
             />
             {errors.stk && <FormErrorMessage>{errors.stk.message}</FormErrorMessage>}
           </FormControl>
@@ -142,7 +142,7 @@ const EditItem = ({ item, isOpen, onClose }: EditItemProps) => {
             <Input
               id="mtk"
               {...register("mtk", { required: "Minimum threshold is required" })}
-              type="number"
+              type="date"
             />
             {errors.mtk && <FormErrorMessage>{errors.mtk.message}</FormErrorMessage>}
           </FormControl>

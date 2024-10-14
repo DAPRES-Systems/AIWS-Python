@@ -182,9 +182,9 @@ def test_update_item_not_enough_permissions(
         "aiwscode": "UPDATED_AIWS",
         "name": "Updated Name",
         "location": "Warehouse B",
-        "expiry": "2025-12-31",
-        "stk": 150,
-        "mtk": 20,
+        "expiry": "2025-01-31",
+        "stk": "2022-12-31",
+        "mtk": "2021-10-30",
         "lot": "UPDATED_LOT",
         "serial": "UPDATED_SERIAL",
         "notes": "Updated notes"

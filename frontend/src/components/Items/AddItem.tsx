@@ -43,8 +43,8 @@ const AddItem = ({ isOpen, onClose }: AddItemProps) => {
       name: "",
       location: "",
       expiry: "",
-      stk: 0,
-      mtk: 0,
+      stk: "",
+      mtk: "",
       lot: "",
       serial: "",
       notes: "",
@@ -158,14 +158,12 @@ const AddItem = ({ isOpen, onClose }: AddItemProps) => {
             </FormControl>
 
             <FormControl isRequired isInvalid={!!errors.stk}>
-              <FormLabel htmlFor="stk">Stock (STK)</FormLabel>
+              <FormLabel htmlFor="stk">STK</FormLabel>
               <Input
                 id="stk"
-                {...register("stk", {
-                  required: "Stock is required.",
-                })}
+                {...register("stk")}
                 placeholder="Stock"
-                type="number"
+                type="date"
               />
               {errors.stk && (
                 <FormErrorMessage>{errors.stk.message}</FormErrorMessage>
@@ -173,14 +171,12 @@ const AddItem = ({ isOpen, onClose }: AddItemProps) => {
             </FormControl>
 
             <FormControl isRequired isInvalid={!!errors.mtk}>
-              <FormLabel htmlFor="mtk">Minimum Threshold (MTK)</FormLabel>
+              <FormLabel htmlFor="mtk">MTK</FormLabel>
               <Input
                 id="mtk"
-                {...register("mtk", {
-                  required: "Minimum threshold is required.",
-                })}
+                {...register("mtk")}
                 placeholder="Minimum Threshold"
-                type="number"
+                type="date"
               />
               {errors.mtk && (
                 <FormErrorMessage>{errors.mtk.message}</FormErrorMessage>
