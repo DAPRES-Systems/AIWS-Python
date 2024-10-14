@@ -1,6 +1,3 @@
 
 # Sensitive Environmental Variables
 .env
-
-# Cache Files
-.DS_Store
